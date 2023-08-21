@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      name: {{ .Release.Name }}
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Release.Name }}
+          image: {{ .Values.image.repository }}feature-flag-app-{{ .Values.image.suffix}}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.pullPolicy }}
+          resources:
+            requests:
+              memory: {{ .Values.resourceRequests.small.memory }}
+              cpu: {{ .Values.resourceRequests.small.cpu }}
+            limits:
+              memory: {{ .Values.resourceLimits.small.memory }}
+              cpu: {{ .Values.resourceLimits.small.cpu }}
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: {{ tpl .Values.imagePullSecrets . }}

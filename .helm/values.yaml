@@ -1,0 +1,50 @@
+replicaCount: 1
+
+image:
+  repository: ""
+  tag: ---
+  suffix: --
+
+envCompany: TE
+
+imagePullSecrets: te-feature-flag-app-docreg-secret
+
+pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+recreationEnabled: false
+
+#----------------------------------------------------------
+resourceRequests:
+  small:
+    memory: "356Mi"
+    cpu: "200m"
+
+resourceLimits:
+  small:
+    memory: "512Mi"
+    cpu: "1500m"
+#----------------------------------------------------------
+
+actuatorPath: /actuator/health
+
+#----------------------------------------------------------
+livenessProbeTime:
+  small:
+    initialDelaySeconds: 600
+
+  periodSeconds: 30
+  timeoutSeconds: 10
+  failureThreshold: 5
+
+#----------------------------------------------------------
+readinessProbeTime:
+  small:
+    initialDelaySeconds: 10
+
+  periodSeconds: 10
+  timeoutSeconds: 10
+  failureThreshold: 5
+#----------------------------------------------------------

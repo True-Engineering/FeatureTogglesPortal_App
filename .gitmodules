@@ -1,0 +1,6 @@
+[submodule "packages/Open_TE_FeatureTogglesPortal_TE_Theme"]
+	path = packages/Open_TE_FeatureTogglesPortal_TE_Theme
+	url = https://github.com/True-Engineering/FeatureTogglesPortal_TE_Theme.git
+[submodule "packages/Open_TE_FeatureTogglesPortal_UI"]
+	path = packages/Open_TE_FeatureTogglesPortal_UI
+	url = https://github.com/True-Engineering/FeatureTogglesPortal_UI.git

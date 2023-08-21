@@ -1,0 +1,59 @@
+{
+  "name": "@true-engineering/feature-toggles-portal",
+  "version": "0.0.1",
+  "description": "Feature Toggles Portal",
+  "author": "True Engineering (https://trueengineering.ru/)",
+  "homepage": "",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack",
+    "dev": "cross-env NODE_ENV=development APP_VERSION=0000 webpack serve",
+    "dev-docker": "cross-env NODE_ENV=development-docker APP_VERSION=0000 webpack serve",
+    "test": "cross-env DEBUG_PRINT_LIMIT=500 jest",
+    "lint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
+    "format": "prettier --write \"**/*.{js,jsx,css,json,ts,tsx}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,css,json,ts,tsx}\"",
+    "full-check": "yarn format:check && yarn lint"
+  },
+  "resolutions": {
+    "**/@types/react": "18.0.26",
+    "**/@types/react-dom": "18.0.9"
+  },
+  "devDependencies": {
+    "@types/jest": "26.0.24",
+    "@types/node": "14.14.22",
+    "@types/prettier": "2.2.0",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.9",
+    "@types/webpack-env": "1.16",
+    "@typescript-eslint/eslint-plugin": "4.14.2",
+    "@typescript-eslint/parser": "4.14.2",
+    "babel-loader": "8.2.2",
+    "copy-webpack-plugin": "11.0.0",
+    "cross-env": "7.0.3",
+    "css-loader": "6.7.1",
+    "eslint": "7.19.0",
+    "eslint-config-prettier": "7.2.0",
+    "eslint-plugin-jest": "24.1.3",
+    "eslint-plugin-react": "7.22.0",
+    "html-webpack-plugin": "5.2.0",
+    "jest": "26.6.3",
+    "prettier": "2.2.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "style-loader": "3.3.1",
+    "ts-jest": "26.5.0",
+    "ts-loader": "8.0.18",
+    "typescript": "4.1.3",
+    "webpack": "5.24.3",
+    "webpack-cli": "4.10.0",
+    "webpack-dev-server": "3.11.2",
+    "webpack-node-externals": "2.5.2"
+  },
+  "dependencies": {
+    "@true-engineering/feature-toggles-portal-ui": "file:./packages/Open_TE_FeatureTogglesPortal_UI",
+    "@true-engineering/true-react-common-ui-kit": "1.0.1",
+    "@true-engineering/ui-kit-true-engineering-theme": "0.4.3",
+    "feature-toggles-portal-theme": "file:./packages/Open_TE_FeatureTogglesPortal_TE_Theme"
+  }
+}

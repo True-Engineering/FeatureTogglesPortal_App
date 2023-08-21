@@ -1,0 +1,5 @@
+image:
+  suffix: te-prod
+
+ingress:
+  host: ""
