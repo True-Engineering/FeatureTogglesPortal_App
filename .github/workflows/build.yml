@@ -1,0 +1,41 @@
+name: Docker build and push
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        submodules: true
+    - uses: paulhatch/semantic-version@v5.1.0
+      id: generate-version
+      with:
+        tag_prefix: "v"
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile -t ghcr.io/true-engineering/feature-flag-app:$SEM_VERSION
+      env:
+        SEM_VERSION: ${{ steps.generate-version.outputs.version }}
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Docker push
+      run: docker push ghcr.io/true-engineering/feature-flag-app:$SEM_VERSION
+      env:
+        SEM_VERSION: ${{ steps.generate-version.outputs.version }}
+    - name: Create tag and push
+      run: git tag v${{ steps.generate-version.outputs.version }} && git push --tags || echo "tag already exist"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
